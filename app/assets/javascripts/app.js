@@ -10,6 +10,10 @@ app.config( function ($routeProvider, $httpProvider) {
       templateUrl: "/partials/partial2.html",
       controller: "teamsController"
     })
+    .when("/partial3", {
+      templateUrl: "/partials/partial3.html",
+      controller: "associationController"
+    })
   // we are using jquery to get the value of the
   // token and setting in as a default header.
   // POST/PATCH/PUT/DELETE -> authenticity token
@@ -123,4 +127,27 @@ app.controller("teamsController", function($scope, teamFactory){
       $scope.teams = json;
     })
   }
+})
+
+
+
+
+app.factory("associationFactory", function ($http) {
+  var factory = {};
+  // show player list
+  //factory.index = function(callback) {
+    //$http.get("/players").success(function(output){
+      //callback(output);
+    //})
+  //}
+
+  return factory;
+})
+
+app.controller("associationController", function($scope, teamFactory){
+  // index: returns teams
+  //teamFactory.index(function(json){
+    //$scope.teams = json;
+  //})
+
 })
