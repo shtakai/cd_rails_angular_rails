@@ -16,11 +16,20 @@ app.config( function ($routeProvider) {
 
 app.factory("playerFactory", function ($http) {
   var factory = {};
+  // show player list
   factory.index = function(callback) {
     $http.get("/players").success(function(output){
       callback(output);
     })
   }
+
+  // create player
+  factory.create = function(playerInfo, callback){
+    $http.post("/players", playerInfo).success(function(output){
+      callback(output);
+    })
+  }
+
   return factory;
 })
 
@@ -38,6 +47,14 @@ app.controller("playersController", function ($scope, playerFactory) {
   playerFactory.index(function(json) {
     $scope.players = json;
   })
+
+  // calling the create method from factory
+  $scope.createPlayer = function(){
+    playerFactory.create($scope.newPlayer, function(json){
+      $scope.players = json;
+      $scope.newPlayer = {};
+    });
+  }
 })
 
 app.controller("teamsController", function($scope, teamFactory){

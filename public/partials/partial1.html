@@ -4,3 +4,15 @@
     <li ng-repeat="player in players">{{ player.first_name }} {{ player.last_name }}</li>
   </ul>
 </div>
+<div>
+  <h2>Add a new Superstar</h2>
+  <p>
+    <label>First Name:</label>
+    <input ng-model="newPlayer.player.first_name" type="text">
+  </p>
+  <p>
+    <label>Last Name:</label>
+    <input type="text" ng-model="newPlayer.player.last_name">
+  </p>
+  <input type="submit" ng-click="createPlayer()" value="Create Player">
+</div>
