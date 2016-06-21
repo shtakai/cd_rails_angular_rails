@@ -1,6 +1,6 @@
 var app = angular.module('nbaApp', ['ngRoute']);
 
-app.config( function ($routeProvider) {
+app.config( function ($routeProvider, $httpProvider) {
   $routeProvider
     .when("/partial1", {
       templateUrl: "/partials/partial1.html",
@@ -10,7 +10,12 @@ app.config( function ($routeProvider) {
       templateUrl: "/partials/partial2.html",
       controller: "teamsController"
     })
-
+  // we are using jquery to get the value of the
+  // token and setting in as a default header.
+  // POST/PATCH/PUT/DELETE -> authenticity token
+  // USU, <input type="hidden" name="authenticity_token" .... >
+  //  on Rails
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 });
 
 
@@ -50,7 +55,13 @@ app.controller("playersController", function ($scope, playerFactory) {
 
   // calling the create method from factory
   $scope.createPlayer = function(){
+    // form includes
+    //   newPlayer.player.first_name
+    //   newPlayer: $scope
+    //   player: hash  player = { first_name:----, last_name:--form-- }
+    //    send this form hash to rails
     playerFactory.create($scope.newPlayer, function(json){
+      //get all players and clear form(first_name, last_name)
       $scope.players = json;
       $scope.newPlayer = {};
     });

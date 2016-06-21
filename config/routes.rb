@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  get 'static_pages/index'
   root 'static_pages#index'
+  get 'static_pages/index'
+
   get 'players' => 'players#index'
+  post 'players' => 'players#create'
+
   get 'teams' => 'teams#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
