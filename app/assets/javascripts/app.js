@@ -39,12 +39,21 @@ app.factory("playerFactory", function ($http) {
 })
 
 app.factory("teamFactory", function ($http) {
-  var factory = {}
+  var factory = {};
+  // just grab teams
   factory.index = function(callback){
     $http.get("/teams").success(function(output){
       callback(output);
     })
   }
+
+  // create team
+  factory.create = function(teamInfo, callback){
+    $http.post("/teams", teamInfo).success(function(output){
+      callback(output);
+    })
+  }
+
   return factory;
 })
 
@@ -69,7 +78,16 @@ app.controller("playersController", function ($scope, playerFactory) {
 })
 
 app.controller("teamsController", function($scope, teamFactory){
+  // index: returns teams
   teamFactory.index(function(json){
     $scope.teams = json;
   })
+
+  // calling the create method from factory
+  $scope.createTeam = function(){
+    teamFactory.create($scope.newTeam, function(json){
+      $scope.teams = json;
+      $scope.newTeam = {};
+    });
+  }
 })

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'players' => 'players#create'
 
   get 'teams' => 'teams#index'
+  post 'teams' => 'teams#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
