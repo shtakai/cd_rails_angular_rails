@@ -65,6 +65,12 @@ app.factory("teamFactory", function ($http) {
     })
   }
 
+  factory.delete = function(id, callback){
+    $http.delete("/teams/" + id).success(function(output){
+      callback(output);
+    })
+  }
+
   return factory;
 })
 
@@ -109,5 +115,12 @@ app.controller("teamsController", function($scope, teamFactory){
       $scope.teams = json;
       $scope.newTeam = {};
     });
+  }
+
+  // call delete method from factory
+  $scope.deleteTeam = function(teamId){
+    teamFactory.delete(teamId,function(json){
+      $scope.teams = json;
+    })
   }
 })

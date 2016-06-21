@@ -8,6 +8,11 @@ class TeamsController < ApplicationController
     render_teams
   end
 
+  def destroy
+    Team.find_by_id(params[:id]).destroy
+    render_teams
+  end
+
   private
 
   def team_params
