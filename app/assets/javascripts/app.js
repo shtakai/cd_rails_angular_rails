@@ -1,4 +1,4 @@
-var app = angular.module('nbaApp, ['ngRoute']');
+var app = angular.module('nbaApp', ['ngRoute']);
 
 app.config( function ($routeProvider) {
   $routeProvider
@@ -6,12 +6,12 @@ app.config( function ($routeProvider) {
       templateUrl: "/partials/partial1.html",
       controller: "playersController"
     })
-    .when("/partial2"), {
+    .when("/partial2", {
       templateUrl: "/partials/partial2.html",
       controller: "teamsController"
     })
 
-} );
+});
 
 app.controller("playersController", function ($scope) {
   $scope.players = [
