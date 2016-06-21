@@ -13,18 +13,18 @@ app.config( function ($routeProvider) {
 
 });
 
-app.controller("playersController", function ($scope) {
-  $scope.players = [
-    { firstName: "Sasimi", lastName: "Udon" },
-    { firstName: "Nikuud", lastName: "Niku" },
-    { firstName: "Takagi", lastName: "Tare" },
-    { firstName: "Ikacho", lastName: "Tori" },
-    { firstName: "Shimur", lastName: "Kane" },
-    { firstName: "Tashia", lastName: "Omae" },
-    { firstName: "Katouu", lastName: "Play" },
-    { firstName: "Kireta", lastName: "Jojo" }
-  ]
-})
+//app.controller("playersController", function ($scope) {
+  //$scope.players = [
+    //{ firstName: "Sasimi", lastName: "Udon" },
+    //{ firstName: "Nikuud", lastName: "Niku" },
+    //{ firstName: "Takagi", lastName: "Tare" },
+    //{ firstName: "Ikacho", lastName: "Tori" },
+    //{ firstName: "Shimur", lastName: "Kane" },
+    //{ firstName: "Tashia", lastName: "Omae" },
+    //{ firstName: "Katouu", lastName: "Play" },
+    //{ firstName: "Kireta", lastName: "Jojo" }
+  //]
+//})
 
 app.controller("teamsController", function ($scope) {
   $scope.teams = [
@@ -46,4 +46,20 @@ app.controller("teamsController", function ($scope) {
     {name: "Chiang Nai Indeans"},
     {name: "Kobe Yakuza"}
   ]
+})
+
+app.factory("playerFactory", function ($http) {
+  var factory = {};
+  factory.index = function(callback) {
+    $http.get("/players").success(function(output){
+      callback(output);
+    })
+  }
+  return factory;
+})
+
+app.controller("playersController", function ($scope, playerFactory) {
+  playerFactory.index(function(json) {
+    $scope.players = json;
+  })
 })
