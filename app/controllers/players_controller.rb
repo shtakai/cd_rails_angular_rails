@@ -8,6 +8,11 @@ class PlayersController < ApplicationController
     render_players
   end
 
+  def destroy
+    Player.find_by_id(params[:id]).destroy
+    render_players
+  end
+
   private
 
   def render_players

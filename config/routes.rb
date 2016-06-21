@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'players' => 'players#index'
   post 'players' => 'players#create'
+  delete 'players/:id' => 'players#destroy'
 
   get 'teams' => 'teams#index'
   post 'teams' => 'teams#create'

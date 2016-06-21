@@ -1,7 +1,13 @@
 <div>
   <h1>Digital Supersters</h1>
   <ul>
-    <li ng-repeat="player in players">{{ player.first_name }} {{ player.last_name }}</li>
+    <li ng-repeat="player in players">
+      {{ player.first_name }} {{ player.last_name }}
+      -
+      <button ng-click="deletePlayer(player.id)">
+        Give Atari2600 to SUPERSTAR
+      </button>
+    </li>
   </ul>
 </div>
 <div>

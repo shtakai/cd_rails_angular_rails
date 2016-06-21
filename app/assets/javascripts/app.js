@@ -35,6 +35,17 @@ app.factory("playerFactory", function ($http) {
     })
   }
 
+  // delete function that makes a delete request to the '/players/:id' route
+  // similar to the create and index methods,
+  //  we are passing the information that we get back from the rails
+  //   PlayersController to the angular playersController
+
+  factory.delete = function(id, callback){
+    $http.delete("/players/" + id).success(function(output){
+      callback(output);
+    })
+  }
+
   return factory;
 })
 
@@ -74,6 +85,15 @@ app.controller("playersController", function ($scope, playerFactory) {
       $scope.players = json;
       $scope.newPlayer = {};
     });
+  }
+
+  // calling the delete method from our factory when the button is clicked
+  //  and updating the $scope.players with the json data that we get back
+  //   from the rails PlayersController
+  $scope.deletePlayer = function(playerId){
+    playerFactory.delete(playerId, function(json){
+      $scope.players = json;
+    })
   }
 })
 
