@@ -147,20 +147,36 @@ app.controller("teamsController", function($scope, teamFactory){
 
 app.factory("associationFactory", function ($http) {
   var factory = {};
-  // show player list
-  //factory.index = function(callback) {
-    //$http.get("/players").success(function(output){
-      //callback(output);
-    //})
-  //}
-
+  factory.index = function(callback) {
+    $http.get("/associations").success(function(output){
+      callback(output);
+    })
+  }
+  factory.change = function(id, callback){
+    $http.get("/associations/" + id ).success(function(outut){
+      callback(output);
+    })
+  }
   return factory;
 })
 
-app.controller("associationController", function($scope, teamFactory){
+app.controller("associationController", function($scope, associationFactory){
   // index: returns teams
   //teamFactory.index(function(json){
     //$scope.teams = json;
   //})
+  associationFactory.index(function(json){
+    $scope.teams = json['teams'];
+    $scope.players = json['players'];
+    $scope.errors = 'test';
+  })
+  associationFactory.change = function(id){
+    console.log('change');
+    associationFactory.change(id, function(json){
+      $scope.teams = json['teams'];
+      $scope.players = json['players'];
+      $scope.errors = 'test';
+    })
+  }
 
 })

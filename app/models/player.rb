@@ -3,6 +3,16 @@ class Player < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
 
+  def self.all_with_team_id(team_id)
+    self.eager_load(:team).where(team_id: team_id).map{|p| {
+      id: p.id,
+      first_name: p.first_name,
+      last_name: p.last_name,
+      team_id: p.team_id,
+      team_name: p.team ? p.team.name : nil
+    }}
+  end
+
   def self.all_with_team
     self.eager_load(:team).map{|p| {
       id: p.id,

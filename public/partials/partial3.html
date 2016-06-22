@@ -1,4 +1,27 @@
 <div>
-  <h1>Digital Association</h1>
+  <h1>Superstar Roasters</h1>
+  <div>
+    {{ errors }}
+  </div>
 </div>
 <div>
+  <p>
+    <label>Select a Squad:</label>
+    <select ng-options="team.id as team.name for team in teams" ng-model="id" ng-change="chage()">
+  </p>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Superstars</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players">
+        <td>{{ player.first_name }} {{ player.last_name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {{ players }}
+</div>
