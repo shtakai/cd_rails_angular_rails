@@ -1,18 +1,35 @@
 <div>
-  <h2>Tokyo Hackers</h2>
-  <ul>
-    <li ng-repeat="team in teams">
-      {{ team.name }}
-       ->
-       <button ng-click="deleteTeam(team.id)">Arrested and sued by KGB</button>
-    </li>
-  </ul>
+  <h2>Digital Legend's Squads</h2>
 </div>
 <div>
-  <h2>Add a new Hackers</h2>
   <p>
-    <label>Hackers Name:</label>
+    <label>Search</label>
+    <input type="text">
+  </p>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Squad's ATARI</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="team in teams">
+        <td>{{ team.name }}</td>
+        <td><button ng-click="deleteTeam(team.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div>
+  <h2>Add a new SQUAD</h2>
+  <p>
+    <label>SQUAD Name:</label>
     <input type="text" ng-model="newTeam.team.name">
   </p>
-  <input type="submit" ng-click="createTeam()" value="Summon Hackers">
+  <input type="submit" ng-click="createTeam()" value="Summon SQUAD">
 </div>
