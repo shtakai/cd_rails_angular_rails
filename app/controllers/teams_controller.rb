@@ -4,8 +4,11 @@ class TeamsController < ApplicationController
   end
 
   def create
-    Team.create team_params
-    render_teams
+    team = Team.new team_params
+    team.valid?
+    errors = team.errors ? team.errors.messages : nil
+    team.save
+    render_teams errors
   end
 
   def destroy
@@ -16,11 +19,15 @@ class TeamsController < ApplicationController
   private
 
   def team_params
+    # TODO ParameterMissing
     params.require(:team).permit(:name)
   end
 
-  def render_teams
-    render json: Team.all
+  def render_teams(errors=nil)
+    render json: {
+       teams: Team.all,
+       errors: errors
+    }
   end
 
 end

@@ -119,13 +119,16 @@ app.controller("playersController", function ($scope, playerFactory) {
 app.controller("teamsController", function($scope, teamFactory){
   // index: returns teams
   teamFactory.index(function(json){
-    $scope.teams = json;
+    //$scope.teams = json;
+    $scope.teams = json['teams'];
+    $scope.errors = json['errors'];
   })
 
   // calling the create method from factory
   $scope.createTeam = function(){
     teamFactory.create($scope.newTeam, function(json){
-      $scope.teams = json;
+      $scope.teams = json['teams'];
+      $scope.errors = json['errors'];
       $scope.newTeam = {};
     });
   }
@@ -133,7 +136,8 @@ app.controller("teamsController", function($scope, teamFactory){
   // call delete method from factory
   $scope.deleteTeam = function(teamId){
     teamFactory.delete(teamId,function(json){
-      $scope.teams = json;
+      $scope.teams = json['teams'];
+      $scope.errors = json['errors'];
     })
   }
 })
