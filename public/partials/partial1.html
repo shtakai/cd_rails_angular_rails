@@ -29,7 +29,7 @@
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>NBA TEAM</th>
+        <th>ATARI SERIES</th>
         <th>DELETE</th>
       </tr>
     </thead>
@@ -54,10 +54,10 @@
     <input type="text" ng-model="newPlayer.player.last_name">
   </p>
   <p>
-    <label>Team:</label>
+    <label>ATARI?:</label>
     <select name="team_id" ng-model="newPlayer.player.team_id">
       <option ng-repeat="team in teams" value="{{ team.id }}">{{ team.name }}</option>
     </select>
   </p>
-  <input type="submit" ng-click="createPlayer()" value="Create Player">
+  <input type="submit" ng-click="createPlayer()" value="Summon Superstar">
 </div>
