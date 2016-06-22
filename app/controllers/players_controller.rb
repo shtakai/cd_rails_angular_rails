@@ -4,8 +4,11 @@ class PlayersController < ApplicationController
   end
 
   def create
-    Player.create player_params
-    render_players
+    player = Player.new player_params
+    player.valid?
+    errors = player.errors ? player.errors.messages : nil
+    player.save
+    render_players errors
   end
 
   def destroy
@@ -15,12 +18,17 @@ class PlayersController < ApplicationController
 
   private
 
-  def render_players
-    render json: Player.all
+  def render_players(errors=nil)
+    render json: {
+      players: Player.all_with_team,
+      teams: Team.all,
+      errors: errors
+    }
   end
 
   def player_params
-    params.require(:player).permit(:first_name, :last_name)
+    # TODO handling ActionController::ParameterMissing when send nothing
+    params.require(:player).permit(:first_name, :last_name, :team_id)
   end
 
 end

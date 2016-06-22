@@ -28,6 +28,7 @@ app.factory("playerFactory", function ($http) {
   // show player list
   factory.index = function(callback) {
     $http.get("/players").success(function(output){
+      //console.log(output);
       callback(output);
     })
   }
@@ -80,7 +81,9 @@ app.factory("teamFactory", function ($http) {
 
 app.controller("playersController", function ($scope, playerFactory) {
   playerFactory.index(function(json) {
-    $scope.players = json;
+    $scope.teams = json['teams'];
+    $scope.players = json['players'];
+    $scope.errors = json['errors'];
   })
 
   // calling the create method from factory
@@ -92,7 +95,9 @@ app.controller("playersController", function ($scope, playerFactory) {
     //    send this form hash to rails
     playerFactory.create($scope.newPlayer, function(json){
       //get all players and clear form(first_name, last_name)
-      $scope.players = json;
+      $scope.teams = json['teams'];
+      $scope.players = json['players'];
+      $scope.errors = json['errors'];
       $scope.newPlayer = {};
     });
   }
@@ -102,7 +107,11 @@ app.controller("playersController", function ($scope, playerFactory) {
   //   from the rails PlayersController
   $scope.deletePlayer = function(playerId){
     playerFactory.delete(playerId, function(json){
-      $scope.players = json;
+      $scope.teams = json['teams'];
+      $scope.players = json['players'];
+      $scope.errors = json['errors'];
+
+
     })
   }
 })

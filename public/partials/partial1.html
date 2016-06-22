@@ -1,14 +1,47 @@
 <div>
   <h1>Digital Supersters</h1>
-  <ul>
-    <li ng-repeat="player in players">
-      {{ player.first_name }} {{ player.last_name }}
-      -
-      <button ng-click="deletePlayer(player.id)">
-        Give Atari2600 to SUPERSTAR
-      </button>
-    </li>
-  </ul>
+  <div>
+    {{ errors }}
+  </div>
+</div>
+<div>
+  <h3>Search Masked Superstar</h3>
+  <p>
+    <label>Any:</label>
+    <input type="test">
+  </p>
+  <p>
+    <label>First Name:</label>
+    <input type="test">
+  </p>
+  <p>
+    <label>Last Name:</label>
+    <input type="test">
+  </p>
+  <p>
+    <label>Team:</label>
+    <input type="test">
+  </p>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>NBA TEAM</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players">
+        <td>{{ player.first_name }}</td>
+        <td>{{ player.last_name }}</td>
+        <td>{{ player.team_name }}</td>
+        <td><button ng-click="deletePlayer(player.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div>
   <h2>Add a new Superstar</h2>
@@ -19,6 +52,12 @@
   <p>
     <label>Last Name:</label>
     <input type="text" ng-model="newPlayer.player.last_name">
+  </p>
+  <p>
+    <label>Team:</label>
+    <select name="team_id" ng-model="newPlayer.player.team_id">
+      <option ng-repeat="team in teams" value="{{ team.id }}">{{ team.name }}</option>
+    </select>
   </p>
   <input type="submit" ng-click="createPlayer()" value="Create Player">
 </div>
